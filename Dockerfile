@@ -46,6 +46,11 @@ RUN apt-get update && apt-get install -y elixir
 
 # Postgres
 RUN sudo apt-get -y install postgresql-9.6 postgresql-contrib-9.6
+
 ADD postgresql.conf /tmp/
 RUN mv /tmp/postgresql.conf /var/lib/postgresql/9.6/main/postgresql.conf
+
+ADD pg_hba.conf /tmp/
+RUN mv /tmp/pg_hba.conf /var/lib/postgresql/9.6/main/pg_hba.conf
+
 RUN sudo chown -R postgres /var/lib/postgresql
