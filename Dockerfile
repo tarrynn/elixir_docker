@@ -46,7 +46,6 @@ RUN apt-get update && apt-get install -y elixir
 
 # Postgres
 RUN sudo apt-get -y install postgresql-9.6 postgresql-contrib-9.6
-
-# Add unpriviledged user
-RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 ubuntu
-RUN sudo chown -R ubuntu:root /var/lib/postgresql/9.6/main
+ADD postgresql.conf /tmp/
+RUN mv /tmp/postgresql.conf /var/lib/postgresql/9.6/main/postgresql.conf
+RUN sudo chown -R postgres /var/lib/postgresql
